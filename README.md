@@ -8,8 +8,8 @@ COMP6002 - Computer Science Project
 
 # Author
 
-Seven Cheng
-Nima Dorji
-Saroj
-Sruthi
-Nidup Dorji
+Seven Cheng <br/>
+Nima Dorji <br />
+Saroj <br/>
+Sruthi <br/>
+Nidup Dorji <br/>
