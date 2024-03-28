@@ -31,7 +31,13 @@ class Mechanic(models.Model):
 class CarBooking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    service_type = models.CharField(max_length=100)
+    # service_type = models.CharField(max_length=100)
+    SERVICE_TYPE = {
+        '1':'Basic Servicing',
+        '2':'Type Servicing',
+        '3':'Dent Repair'
+    } 
+    service_type = models.CharField(max_length = 50, choices=SERVICE_TYPE)
     booking_datetime = models.DateTimeField()
     mechanic = models.ForeignKey(Mechanic, on_delete=models.CASCADE)
     status = models.CharField(max_length=50)
