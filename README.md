@@ -13,4 +13,5 @@ Nima Dorji <br />
 Saroj <br/>
 Sruthi <br/>
 Nidup Dorji <br/>
-https://github.com/ned1010/SmartCar-Repair-Booking-System/blob/master/backend/smartcar_repair_booking_system/smartcar_repair_booking_system/assets/img/frontpage.PNG
+![Frontpage](https://github.com/ned1010/SmartCar-Repair-Booking-System/blob/master/backend/smartcar_repair_booking_system/smartcar_repair_booking_system/assets/img/frontpage.PNG
+)
