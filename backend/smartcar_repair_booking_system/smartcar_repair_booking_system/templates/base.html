@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block page_title %}{% endblock page_title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% comment %} block for specific app level css {% endcomment %}
+    {% block css_files %}{% endblock css_files %}
+</head>
+<body>
+    {% include "includes/header.html" %}
+    {% block content %}{% endblock content %}
+</body>
+</html>
