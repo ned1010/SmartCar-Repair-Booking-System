@@ -43,3 +43,7 @@ Thumbs.db
 __pycache__
 db.sqlite3
 media
+
+# mypy 
+.mypy_cache/ 
+
