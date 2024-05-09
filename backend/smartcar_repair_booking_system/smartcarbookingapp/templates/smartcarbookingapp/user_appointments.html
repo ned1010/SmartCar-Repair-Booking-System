@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+
+{% endblock css_files %}
+{% block page_title %}
+Appointments
+{% endblock page_title %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointments</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Appointments</h2>
+    <table>
+        <thead>
+            <tr>                
+                <th>Service Type</th>
+                <th>Booking Date</th>
+                <th>Booking Time</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Mechanic</th>
+                <th>Status</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>                
+                <td>{{ booking.service_type }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.booking_time }}</td>
+                <td>{{ booking.car.car_company }}</td>                
+                <td>{{ booking.car.car_model }}</td>
+                <td>{{ booking.car.car_year }}</td>
+                <td>{{ booking.mechanic }}</td>
+                <td>{{ booking.status }}</td>
+                <td>{{ booking.comments }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock content %}

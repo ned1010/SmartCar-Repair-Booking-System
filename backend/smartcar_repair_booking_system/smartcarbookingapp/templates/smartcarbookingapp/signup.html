@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+
+{% endblock css_files %}
+{% block page_title %}
+SignUp page
+{% endblock page_title %}
+{% block content %}
+ 
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-left">
+              <div class="mb-md-3 mt-md-4 pb-3">
+                <h3><center>User SignUp</center></h3>
+                <form method="post">
+                  {% csrf_token %}   
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                </div>
+                <div class="card-body text-center">
+                <button class="btn btn-outline-light btn-lg px-3" type="submit">Sign Up</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+  </form>
+
+{% endblock content %}

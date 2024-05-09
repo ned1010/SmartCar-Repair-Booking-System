@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+
+{% endblock css_files %}
+{% block page_title %}
+Booking
+{% endblock page_title %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Repair Booking Form</title>  
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">BOOKING AN APPOINTMENT</h2>
+      <form method="post">
+        {% csrf_token %}       
+        <div class="form-group">
+          <label for="servicetype">Service Type</label>         
+          <div class="form-outline form-white mb-4">
+            <select class="form-select" id="servicetype" name="service_types" required>
+              <option value="Select sevice type">Select sevice type</option>
+              <option value="Engine Servicing">Engine Servicing</option>
+              <option value="Tyre Servicing">Tyre Servicing</option>
+              <option value="Glass Service">Glass Service</option>
+              <option value="Body Repair">Body Repair</option>
+            </select>
+        </div>
+        </div>        
+        <div class="form-group">
+          <div class="form-group row">
+          <div class="col">  
+          <label for="date">Preferred Date</label>
+          <input type="date" class="form-control" id="date" name="date" placeholder="Date" required>
+          </div>
+        <div class="col">
+          <label for="time">Preferred Time</label>
+          <input type="time" class="form-control" id="time" name="time" placeholder="Time" required>
+        </div>
+        </div>        
+      </div>
+        <div class="form-group">
+        <div class="form-group row">
+          <label for="name">Name</label>
+          <div class="col">           
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" required>
+          </div>
+          <div class="col">           
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last name" required>
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+          <label for="carmake">Make</label>
+          <input type="text" class="form-control" id="make" name="make" placeholder="Enter your car make" required>
+        </div> 
+        <div class="form-group">
+          
+          <label for="carmodel">Model</label>
+          <input type="text" class="form-control" id="model" name="model" placeholder="Enter your car model" required>
+        </div> 
+        
+          <div class="form-group">
+            <label for="caryear">Year</label>
+            <input type="text" class="form-control" id="year" name="year" placeholder="Enter your car manufacture year" required>
+          </div> 
+          
+          <div class="form-group"> 
+          <label for="message">Additional Information</label>
+          <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+          </div>
+          <div class="container mt-3">          
+        <div class="form-group d-flex justify-content-center">
+          <button type="submit" class="btn btn-outline-light btn-lg px-5">Submit</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+{% endblock content %}

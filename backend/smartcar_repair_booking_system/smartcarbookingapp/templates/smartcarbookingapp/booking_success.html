@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-success" role="alert">
+                Booking successful! Thank you for choosing SmartCar.
+            </div>
+        </div>
+    </div>
+</div>
+<script>    
+    setTimeout(function() {
+        window.location.href = "{% url 'index' %}";  
+    }, 3000);  
+</script>
+
+{% endblock %}

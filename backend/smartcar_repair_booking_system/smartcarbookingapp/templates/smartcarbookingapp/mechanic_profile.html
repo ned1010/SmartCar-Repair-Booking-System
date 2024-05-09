@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+<style>    
+    .card {
+      width: 500px; 
+      height: auto; 
+      margin-bottom: 30px;
+      color: wheat;
+    }
+    .card-img-top {
+        width: 80px; 
+        height: 80px; 
+    }
+  </style>
+{% endblock css_files %}
+{% block page_title %}
+Mechanic Profiles
+{% endblock page_title %}
+{% block content %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Card</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+</head>
+<body> 
+ 
+<div class="container">  
+  {% for item in data %}
+  <div class="card mb-3">
+    <div class="card-body">
+        <img src="{% static 'smartcarbookingapp/images/profileimage.png' %}" class="card-img-top" alt="Image">
+      <p class="card-title">Name: {{ item.mechanic_name }}</p>  
+      <p class="card-text">Email: {{ item.mechanic_email }}</p>
+      <p class="card-text">Phone: {{ item.mechanic_phone_number }}</p>
+      <p class="card-text">Status: {{ item.mechanic_status }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>
+
+{% endblock content %}

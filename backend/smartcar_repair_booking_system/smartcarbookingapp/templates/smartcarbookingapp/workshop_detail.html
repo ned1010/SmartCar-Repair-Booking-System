@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+<style>    
+    .card {
+      width: 500px; 
+      height: auto; 
+      margin-bottom: 30px;
+      color: wheat;
+    }
+    .card-img-top {
+        width: 80px; 
+        height: 80px; 
+    }
+  </style>
+{% endblock css_files %}
+{% block page_title %}
+Workshops
+{% endblock page_title %}
+{% block content %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+</head>
+<body> 
+ 
+<div class="container">  
+  {% for item in data %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <img src="{% static 'smartcarbookingapp/images/workshop_image.jpg' %}" class="card-img-top" alt="Image">
+      <p class="card-title">Name: {{ item.workshop_name }}</p>
+      <p class="card-text">Address: {{ item.workshop_address }}</p>  
+      <p class="card-text">Email: {{ item.workshop_email }}</p>
+      <p class="card-text">Phone: {{ item.workshop_phone_number }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+
+{% endblock css_files %}
+{% block page_title %}
+Login page
+{% endblock page_title %}
+{% block content %}
+<form method="post" action="{% url 'login_page' %}">
+  {% csrf_token %}
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-left">
+              <div class="mb-md-5 mt-md-4 pb-3">
+                <h3><center>SmartCar Login</center></h3>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
+              </div>
+              <div class="card-body text-center">
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+{% endblock content %}
