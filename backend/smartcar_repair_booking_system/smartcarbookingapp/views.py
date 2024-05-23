@@ -37,7 +37,8 @@ def booking_application_form(request):
         car_booking.customer = customer
         car_booking.save()
 
-        return render(request, 'smartcarbookingapp/booking_success.html')
+        return render(request, 'smartcarbookingapp/booking_success.html')        
+    
     else:
         return render(request, 'smartcarbookingapp/booking_form.html')
 
@@ -49,7 +50,8 @@ def user_login(request):
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)            
+            login(request, user)
+            request.user.is_authenticated     
             return redirect('user_appointments') 
         else:
             error_message = 'Invalid username or password'
@@ -59,26 +61,32 @@ def user_login(request):
 
 # User signup function
 def user_signup(request):
-    if request.method == 'POST':
+     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
         
-        if User.objects.filter(username=username).exists():
+        error_message = None
+
+        # Check if passwords match
+        if password != confirm_password:
+            error_message = 'Passwords do not match'
+        elif User.objects.filter(username=username).exists():
             error_message = 'Username already exists'
-            return render(request, 'smartcarbookingapp/signup.html', {'error': error_message})
-        if User.objects.filter(email=email).exists():
+        elif User.objects.filter(email=email).exists():
             error_message = 'Email already exists'
+        
+        if error_message:
             return render(request, 'smartcarbookingapp/signup.html', {'error': error_message})
-        
-      
+
+        # Create the user
         user = User.objects.create_user(username=username, email=email, password=password)
-        
+        user.save()
         login(request, user)
-        
-        return redirect('login_page')
-    else:
-        return render(request, 'smartcarbookingapp/signup.html')
+        return redirect('index')
+
+     return render(request, 'smartcarbookingapp/signup.html')
 
 
 # show list of mechanics
@@ -97,7 +105,9 @@ def user_logout(request):
     return render(request, 'smartcarbookingapp/index.html')
 
 
-def user_appointments(request):
-    # Retrieve appointments for the logged-in user with related car and customer information
+#Function to get the loged in user appointments
+def user_appointments(request):    
     user_bookings = CarBooking.objects.filter(car__car_customer_id__customer_email=request.user.email)
+    request.user.is_authenticated
     return render(request, 'smartcarbookingapp/user_appointments.html', {'bookings': user_bookings})
+

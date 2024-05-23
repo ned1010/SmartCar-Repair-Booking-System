@@ -4,7 +4,7 @@
 
 {% endblock css_files %}
 {% block page_title %}
-Login page
+Login
 {% endblock page_title %}
 {% block content %}
 <form method="post" action="{% url 'login_page' %}">
@@ -29,6 +29,9 @@ Login page
               <div class="card-body text-center">
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
               </div>
+              <div class="card-body text-center">
+              <p>Don't have an account?<a href="{% url 'signup' %}">SignUp</a></p>
+            </div>
             </div>
           </div>
         </div>

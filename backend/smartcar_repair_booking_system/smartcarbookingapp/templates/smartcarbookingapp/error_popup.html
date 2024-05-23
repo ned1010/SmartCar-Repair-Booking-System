@@ -17,15 +17,17 @@
     </div>
 </div>
 
-<script>
-    // Function to show error modal on page load
-    $(document).ready(function(){
-        showErrorModal('{{ error }}');
-    });
 
-    // Function to show error modal
+<script>
     function showErrorModal(message) {
         document.getElementById('errorMessage').innerText = message;
         $('#errorPopup').modal('show');
     }
+
+    $(document).ready(function() {
+        var errorMessage = "{{ error}}";
+        if (errorMessage) {
+            showErrorModal(errorMessage);
+        }
+    });
 </script>

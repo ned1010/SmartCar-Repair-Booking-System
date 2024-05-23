@@ -1,46 +1,84 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css_files %}
-
 {% endblock css_files %}
 {% block page_title %}
-SignUp page
+SignUp
 {% endblock page_title %}
 {% block content %}
- 
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-left">
-              <div class="mb-md-3 mt-md-4 pb-3">
-                <h3><center>User SignUp</center></h3>
-                <form method="post">
-                  {% csrf_token %}   
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-left">
+                        <div class="mb-md-3 mt-md-4 pb-4">
+                            <h3><center>User SignUp</center></h3>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                </div>
+                                <div class="card-body text-center">
+                                    <button class="btn btn-outline-light btn-lg px-3" type="submit">Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                </div>
-                <div class="card-body text-center">
-                <button class="btn btn-outline-light btn-lg px-3" type="submit">Sign Up</button>
             </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
-    
-  </form>
+</section>
 
+<div class="modal" id="errorPopup" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p id="errorMessage"></p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
 {% endblock content %}
+{% block js_files %}
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+  function showErrorModal(message) {
+      document.getElementById('errorMessage').innerText = message;
+      $('#errorPopup').modal('show');
+  }
+
+  $(document).ready(function() {
+      var errorMessage = "{{ error|escapejs }}";
+      if (errorMessage) {
+          showErrorModal(errorMessage);
+      }
+  });
+</script>
+{% endblock js_files %}
