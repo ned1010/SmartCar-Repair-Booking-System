@@ -6,6 +6,12 @@
 {% block page_title %}
 Home page
 {% endblock page_title %}
+{% block logout %}
+<ul class="navbar-nav ml-auto">         
+  <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+  </li>
+{% endblock logout %}
 {% block content %}
 <form>
 <section class="vh-100 gradient-custom">

@@ -6,14 +6,25 @@
 {% block page_title %}
 Appointments
 {% endblock page_title %}
+{% block login_page %}
+<ul class="navbar-nav ml-auto">         
+  <li class="nav-item">
+      <a class="nav-link" href="{% url 'login_page' %}">Login</a>
+  </li>
+{% endblock login_page %}
+{% block signup %}
+<ul class="navbar-nav ml-auto">         
+  <li class="nav-item">
+      <a class="nav-link" href="{% url 'signup' %}">Login</a>
+  </li>
+{% endblock signup %}
 {% block content %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Appointments</title>
+    <title>My Bookings</title>
     <style>
         table {
             width: 100%;
@@ -30,7 +41,7 @@ Appointments
     </style>
 </head>
 <body>
-    <h2>Your Appointments</h2>
+    <h2>My Bookings</h2>
     <table>
         <thead>
             <tr>                
@@ -54,14 +65,15 @@ Appointments
                 <td>{{ booking.car.car_company }}</td>                
                 <td>{{ booking.car.car_model }}</td>
                 <td>{{ booking.car.car_year }}</td>
-                <td>{{ booking.mechanic }}</td>
+                <td>{{ booking.mechanic.mechanic_name}}</td>
                 <td>{{ booking.status }}</td>
                 <td>{{ booking.comments }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'user_appointments' %}">Book New Appointments</a>
+    <div><a href="{% url 'booking_application_form' %}">Book New Appointments</a></div>
+    
 </body>
 </html>
 

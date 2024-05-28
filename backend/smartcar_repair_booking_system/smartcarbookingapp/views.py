@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import CarBooking,Customer,Car,Mechanic,Workshop
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 # Create your views here.
 def index(request):    
@@ -50,8 +52,7 @@ def user_login(request):
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            request.user.is_authenticated     
+            login(request, user)            
             return redirect('user_appointments') 
         else:
             error_message = 'Invalid username or password'
@@ -61,32 +62,33 @@ def user_login(request):
 
 # User signup function
 def user_signup(request):
-     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        
-        error_message = None
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
 
-        # Check if passwords match
         if password != confirm_password:
-            error_message = 'Passwords do not match'
-        elif User.objects.filter(username=username).exists():
-            error_message = 'Username already exists'
-        elif User.objects.filter(email=email).exists():
-            error_message = 'Email already exists'
-        
-        if error_message:
-            return render(request, 'smartcarbookingapp/signup.html', {'error': error_message})
+            messages.error(request, "Passwords do not match.")
+            return render(request, 'smartcarbookingapp/signup.html', {'error': "Passwords do not match."})
 
-        # Create the user
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()
-        login(request, user)
-        return redirect('index')
+        try:
+            if User.objects.filter(username=username).exists():
+                raise ValidationError("Username already exists.")
+            if User.objects.filter(email=email).exists():
+                raise ValidationError("Email already exists.")
 
-     return render(request, 'smartcarbookingapp/signup.html')
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            return redirect('login_page')
+        except ValidationError as e:
+            messages.error(request, str(e))
+            return render(request, 'smartcarbookingapp/signup.html', {'error': str(e)})
+        except Exception as e:
+            messages.error(request, "An unexpected error occurred.")
+            return render(request, 'smartcarbookingapp/signup.html', {'error': "An unexpected error occurred."})
+
+    return render(request, 'smartcarbookingapp/signup.html')
 
 
 # show list of mechanics
